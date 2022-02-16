@@ -16,7 +16,7 @@ Good luck!"""
 import requests
 from random import choice
 from bs4 import BeautifulSoup
-
+#from time import sleep
 def first_clue(page_url):
     page = requests.get('http://quotes.toscrape.com'+ page_url)
     soup = BeautifulSoup(page.text, "html.parser")
@@ -43,6 +43,7 @@ while next_button:
     new_soup = BeautifulSoup(new_page.text, "html.parser")
     info += get_info(new_soup)
     next_button = new_soup.find(class_="next")
+    #sleep(2)
 
 print(info)
 # info = {}
@@ -73,5 +74,5 @@ while True:
                 print(f"Sorry! You suck...Here's a hint\nThe first letter of their last name is {split_name[1][0]}")
             else: 
                 print(f"You lose, good day sir!....P.S. the answer was {name}")
-    if input("Play again? y/n ") != "y":
+    if input("Play again? (y/n) ") != "y":
         break
