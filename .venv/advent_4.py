@@ -1,6 +1,5 @@
 import re
 import pprint
-from tabnanny import check
 """2 concepts. 
 1. generate numbers that would lead to win and check against next number in sequence. 
 2. Check every card for a winner every draw

@@ -20,8 +20,7 @@ def make_gamma(li):
             gamma += '0'
             
 
-    epsilon = ''.join(['1' if i == '0' else '0'
-                     for i in gamma])   
+    epsilon = ''.join(['1' if i == '0' else '0' for i in gamma])   
     return [gamma, epsilon]
 
 def make_epsilon(li):
@@ -53,7 +52,7 @@ for index in range (0,len(gamma)):
     if len(y)== 1:
         break
     y = list(filter(lambda i: i[index] == make_gamma(y)[0][index], y))
-    #$print(y)
+    #print(y)
 
 
 z = li_x.copy()
