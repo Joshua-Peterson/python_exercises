@@ -3,7 +3,7 @@ import pprint
 
 example_input = ".venv/advent_8_example.txt"
 input = ".venv/advent_8_input.txt"
-with open(input) as file:
+with open(example_input) as file:
     data =  file.read()
    
 
@@ -15,13 +15,60 @@ for i in range(len(signals)):
     signals[i] = signals[i].split()
     outputs[i] = outputs[i].split()
 
-# print(sum(1 for i in outputs if len(i) in [2, 3, 4, 7]))
+
 def countif(li):
     return sum(1 for i in li if len(i) in [2,3,4,7])
 
-print(sum(countif(i) for i in outputs))
-
-
-
+# print(sum(countif(i) for i in outputs))
 # print(signals)
-# print(outputs)
+def single_line_signal_key(signal):
+    signal_key = {}
+    sort_inputs(signal)
+    signal_sorted = sorted(signal, key=len)
+    signal_key[signal_sorted[0]] = 1
+    signal_key[signal_sorted[1]] = 7
+    signal_key[signal_sorted[2]] = 4
+    signal_key[signal_sorted[9]] = 8
+    five_len = signal_sorted[3:6]
+    six_len = signal_sorted[6:9]
+    four_one_diff = signal_sorted[2].replace(signal_sorted[0],'')
+    for i in five_len:
+        if signal_sorted[0][0] in i and signal_sorted[0][1] in i :
+            signal_key[i] = 3
+        elif four_one_diff[0] in i and four_one_diff[1] in i:
+            signal_key[i] = 5
+        else:
+            signal_key[i] = 2
+    for i in six_len:
+        if signal_sorted[2][0] in i and signal_sorted[2][1] in i and signal_sorted[2][2] in i and signal_sorted[2][3] in i:
+            signal_key[i] = 9
+        elif signal_sorted[0][0] in i and signal_sorted[0][1] in i:
+            signal_key[i] = 0
+        else:
+            signal_key[i] = 6
+    return signal_key
+
+def get_output_value(output, signal_key):
+    sort_inputs(output)
+    output_list = [str(signal_key[i]) for i in output]
+    print(output_list)
+    return int("".join(output_list))
+
+
+
+
+def sort_inputs(signal): 
+    for i in range(len(signal)):
+        signal[i] = "".join(sorted(signal[i]))
+
+
+
+def main():
+    x = [get_output_value(outputs[i], single_line_signal_key(signals[i])) for i in range(len(signals))]
+    print(x)
+    print(sum(x))
+    
+    
+
+if __name__ == "__main__":
+    main()
