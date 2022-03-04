@@ -13,7 +13,7 @@ class Octopus:
     energy: int
     flashed: bool
     flash_counter: int
-    # octoflash: ClassVar[int] = 0
+    octoflash: ClassVar[int] = 0
 
 
     def increment(self):
@@ -23,6 +23,7 @@ class Octopus:
     def flash(self):
         self.energy = 0
         self.flashed = True
+        Octopus.octoflash += 1
 
 with open(input) as file:
     energy =  file.read().splitlines()
@@ -88,28 +89,26 @@ def all_flashed(matrix):
 
 
 def main():
-    # PART 1 & 1.5
-    # for i in range(200):
-    #     step_one(energy_padded)
-    #     raise_adjacent(energy_padded)
-    #     if all_flashed(energy_padded):
-    #         print(i+1)
-    #     step_three(energy_padded)
-    # # pprint.pprint(energy_padded)
+    # PART 1
+    for i in range(100):
+        step_one(energy_padded)
+        raise_adjacent(energy_padded)
+        step_three(energy_padded)
+    # pprint.pprint(energy_padded)
+    print(Octopus.octoflash)
     # pprint.pprint(count_flashes(energy_padded))
 
 # PART 2
-    safe_step = 0
-    while True:
-        step_one(energy_padded)
-        raise_adjacent(energy_padded)
-        safe_step += 1
-        if all_flashed(energy_padded):
-            break
-        step_three(energy_padded)
-    print(safe_step)
-    #  pprint.pprint(energy_padded)
-    # pprint.pprint(count_flashes(energy_padded))
+    # safe_step = 0
+    # while True:
+    #     step_one(energy_padded)
+    #     raise_adjacent(energy_padded)
+    #     safe_step += 1
+    #     if all_flashed(energy_padded):
+    #         break
+    #     step_three(energy_padded)
+    # print(safe_step)
+ 
 
     
 
