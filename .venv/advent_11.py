@@ -30,13 +30,14 @@ with open(input) as file:
     for index, item in enumerate(energy):
          energy[index] = [Octopus(int(j), False, 0) for j in item]
 
-energy_padded = energy
+energy_padded = energy[:]
 for i in energy_padded:
     i.insert(0,Octopus(0,True,0))
     i.append(Octopus(0,True,0))
 
 energy_padded.insert(0, [Octopus(0,True,0) for j in energy_padded[0]])
 energy_padded.append([Octopus(0, True,0) for j in energy_padded[0]])
+pprint.pprint(energy)
 
 
 # def step_one(matrix):
