@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 example_input = ".venv/advent_13_example.txt"
 input = ".venv/advent_13_input.txt"
 
-with open(example_input) as file:
+with open(input) as file:
     dots =  file.read().splitlines()
     dots = [i.split(',') for i in dots]
     dots = [[int(i) for i in j] for j in dots]
@@ -46,7 +46,7 @@ def fold_left(vert, dots):
             i[0] = 2*vert-i[0]
 
 def main():
-    for i in example_instructions:
+    for i in instructions:
         if i[0] == 'y':
             fold_up(i[1],dots)
         else:
@@ -56,6 +56,14 @@ def main():
         if i not in unique_dots:
             unique_dots.append(i)
     print(len(unique_dots))
+    x = [i[0] for i in unique_dots]
+    y = [-i[1] for i in unique_dots]
+    # data = np.array(dots)
+    # x, y = data.T
+    plt.scatter(x, y)
+    plt.xlim([-20, 50])
+    plt.ylim([-10,10])
+    plt.show()
 
 if __name__ == "__main__":
     main()
